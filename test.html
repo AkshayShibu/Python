@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grid Slideshow</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: #222;
+}
+
+/* Container */
+.slideshow {
+  width: 400px;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+}
+
+/* Grid row of images */
+.slides {
+  display: grid;
+  grid-template-columns: repeat(4, 100%);
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slides img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Buttons */
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.prev { left: 5px; }
+.next { right: 5px; }
+</style>
+</head>
+
+<body>
+
+<div class="slideshow">
+  <div class="slides" id="slides">
+    <img src="https://picsum.photos/600/400?1">
+    <img src="https://picsum.photos/600/400?2">
+    <img src="https://picsum.photos/600/400?3">
+    <img src="https://picsum.photos/600/400?4">
+  </div>
+
+  <button class="prev" onclick="prevSlide()">‹</button>
+  <button class="next" onclick="nextSlide()">›</button>
+</div>
+
+<script>
+let index = 0;
+const slides = document.getElementById("slides");
+const total = slides.children.length;
+
+function showSlide(i) {
+  index = (i + total) % total;
+  slides.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function nextSlide() {
+  showSlide(index + 1);
+}
+
+function prevSlide() {
+  showSlide(index - 1);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flow — Modern Workspace</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #10b981;
+      --dark: #0f172a;
+      --gray: #64748b;
+      --light: #f8fafc;
+      --border: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: white;
+      color: var(--dark);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* ── Header / Navbar ── */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ── Hero Section ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1.5px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.35rem;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── Features ── */
+    #features {
+      padding: 120px 5%;
+      background: white;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 1.3rem;
+      max-width: 680px;
+      margin: 0 auto 5rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      padding: 2.5rem;
+      border-radius: 16px;
+      background: var(--light);
+      border: 1px solid var(--border);
+      transition: all 0.35s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border-color: var(--primary);
+    }
+
+    .feature-icon {
+      font-size: 3.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .feature-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── CTA Section ── */
+    #cta {
+      background: var(--dark);
+      color: white;
+      padding: 120px 5%;
+      text-align: center;
+    }
+
+    #cta .section-title {
+      color: white;
+    }
+
+    #cta p {
+      font-size: 1.4rem;
+      max-width: 720px;
+      margin: 1.5rem auto 2.5rem;
+      opacity: 0.9;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #020617;
+      color: #94a3b8;
+      padding: 5rem 5% 2rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 2rem 0 3rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 1.5rem;
+      }
+      .hero h1 {
+        font-size: 3.8rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header id="header">
+    <nav>
+      <div class="logo">Flow</div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#cta">Pricing</a>
+        <a href="#">Blog</a>
+        <a href="#" class="btn btn-outline">Sign in</a>
+        <a href="#" class="btn btn-primary">Start Free Trial</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1>The modern workspace <span>your team deserves</span></h1>
+      <p>Collaborate, create, and ship faster with the all-in-one platform built for today's remote & hybrid teams.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary" style="padding: 1rem 2.2rem; font-size: 1.2rem;">Get started — it's free</a>
+        <a href="#" class="btn btn-outline" style="padding: 1rem 2.2rem; font-size: 1.2rem;">Watch demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <h2 class="section-title">Why teams love Flow</h2>
+    <p class="section-subtitle">Everything you need to stay organized and move fast — without the chaos.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Fast</h3>
+        <p>Built for speed. Real-time collaboration with near-zero lag even on large documents and whiteboards.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <h3>Modular & Flexible</h3>
+        <p>Mix docs, tasks, databases, whiteboards, and code in the same workspace — no app switching.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Enterprise-grade Security</h3>
+        <p>SOC 2 Type II, end-to-end encryption, granular permissions, and audit logs included by default.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Works Everywhere</h3>
+        <p>Beautiful native apps for desktop, mobile, tablet — and zero-compromise web experience.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Team-first Design</h3>
+        <p>Built-in comments, @mentions, threaded discussions, and presence indicators keep everyone aligned.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3>100+ Integrations</h3>
+        <p>Slack, GitHub, Figma, Google Drive, Linear, Notion import, Zapier — and growing every week.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section id="cta">
+    <h2 class="section-title">Ready to transform how your team works?</h2>
+    <p>Join 42,000+ forward-thinking teams who ship faster and communicate better with Flow.</p>
+    <a href="#" class="btn btn-primary" style="padding: 1.2rem 2.8rem; font-size: 1.3rem;">Start your free trial →</a>
+    <p style="margin-top: 1.5rem; font-size: 1.1rem; opacity: 0.85;">No credit card required • Cancel anytime</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="logo" style="color:white; font-size:2rem; margin-bottom:1.5rem;">Flow</div>
+    <div class="footer-links">
+      <a href="#">Features</a>
+      <a href="#">Pricing</a>
+      <a href="#">Security</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
+    </div>
+    <p style="margin-top:3rem; font-size:0.95rem;">&copy; 2026 Flow. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Simple scroll effect for header
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+
+</body>
+</html>

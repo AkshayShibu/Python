@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Semantic Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Navigation */
+nav {
+    background: #444;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav li {
+    margin: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+}
+
+nav a:hover {
+    background: #666;
+    border-radius: 4px;
+}
+
+/* Main Layout */
+main {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Content */
+.content {
+    flex: 3;
+}
+
+article {
+    background: #f4f4f4;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+/* Sidebar */
+aside {
+    flex: 1;
+    background: #e2e2e2;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+    </style>
+    
+</head>
+<body>
+
+<header>
+    <h1>My Responsive Website</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section class="content">
+        <article>
+            <h2>Welcome</h2>
+            <p>This is a sample responsive webpage using HTML5 semantic elements and CSS.</p>
+        </article>
+
+        <article>
+            <h2>Features</h2>
+            <p>Clean layout, flexible design, and mobile-friendly structure.</p>
+        </article>
+    </section>
+
+    <aside>
+        <h3>Sidebar</h3>
+        <p>Extra information or links can go here.</p>
+    </aside>
+</main>
+
+<footer>
+    <p>&copy; 2026 My Website. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

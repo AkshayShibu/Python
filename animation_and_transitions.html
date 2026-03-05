@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSS Animations & Transitions Demo</title>
+  <style>
+    :root {
+      --primary: #6366f1;    
+      --primary-dark: #4f46e5; 
+      --bg: #f8fafc;
+      --card-bg: white;
+      --text: #1e293b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    /* ── 1. Modern Button with Hover Transition ── */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      background: var(--primary);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 12px 28px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn:active {
+      transform: translateY(-1px) scale(0.98);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+    }
+
+    .center {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    /* ── 2. Card Hover Effect ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.14);
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, rgba(99,102,241,0.08));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .card-content {
+      padding: 1.8rem;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    /* ── 3. Pure CSS Loading Spinner ── */
+    .loader {
+      width: 60px;
+      height: 60px;
+      margin: 4rem auto;
+      border: 6px solid #e2e8f0;
+      border-top: 6px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── 4. Fade + Slide Up on Scroll ── */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger {
+      transition-delay: calc(0.12s * var(--order));
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>CSS Animations & Transitions Demo</h1>
+
+  <div class="center">
+    <button class="btn">Hover Me!</button>
+  </div>
+
+  <h2>Cards with Lift + Glow on Hover</h2>
+
+  <div class="cards">
+    <div class="card animate-on-scroll stagger" style="--order:1">
+      <div class="card-content">
+        <h3>Feature One</h3>
+        <p>Smooth hover lift with modern easing and subtle gradient overlay.</p>
+      </div>
+    </div>
+    <div class="card animate-on-scroll stagger" style="--order:2">
+      <div class="card-content">
+        <h3>Feature Two</h3>
+        <p>Scales slightly and increases shadow depth for depth effect.</p>
+      </div>
+    </div>
+    <div class="card animate-on-scroll stagger" style="--order:3">
+      <div class="card-content">
+        <h3>Feature Three</h3>
+        <p>Responsive grid — works great on mobile too.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Pure CSS Spinner</h2>
+  <div class="loader"></div>
+
+  <h2>More Content (scroll down to see animation)</h2>
+
+  <div style="height: 60vh; min-height: 400px; background: linear-gradient(to bottom, #f1f5f9, #e0f2fe); border-radius: 16px; margin: 3rem 0; display: grid; place-items: center;">
+    <p style="font-size: 1.4rem; max-width: 600px; text-align: center;">
+      Scroll further if needed — more elements below will fade in nicely.
+    </p>
+  </div>
+
+  <div class="card animate-on-scroll" style="max-width: 600px; margin: 0 auto 4rem;">
+    <div class="card-content">
+      <h3>Final Section</h3>
+      <p>This whole card faded in with a gentle slide-up when it entered the viewport.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Simple Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // observer.unobserve(entry.target); // uncomment if you want one-time animation
+    }
+  });
+}, {
+  threshold: 0.15,
+  rootMargin: "0px 0px -80px 0px"
+});
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

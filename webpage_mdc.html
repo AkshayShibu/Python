@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Material Card</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "@material/web/": "https://esm.run/@material/web@1/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import '@material/web/all.js';
+  </script>
+
+  <style>
+    body {
+      font-family: 'Roboto', system-ui, sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    md-card {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 16px;
+    }
+    .content {
+      padding: 24px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+      color: #1e293b;
+    }
+    p {
+      margin: 0 0 24px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <md-card>
+    <div class="content">
+      <h1>Hello, Akshay</h1>
+      <p>Kanayannur, Kerala · A clean & peaceful place</p>
+      
+      <div style="display:flex; gap:12px; justify-content:flex-end;">
+        <md-text-button>Learn more</md-text-button>
+        <md-filled-button>Action</md-filled-button>
+      </div>
+    </div>
+  </md-card>
+
+</body>
+</html>

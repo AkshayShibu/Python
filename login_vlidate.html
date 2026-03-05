@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <script src="validate.js"></script>
+    <style>label { display:inline-block; width:140px; }</style>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+    <label>Username</label> <input type="text" id="username"><br><br>
+    <label>Email:</label><input type="text" id="email"><br><br>
+    <label>Password:</label><input type="password" id="password"><br><br>
+    <label>confirm Password</label><input type="password" id="confirmPassword"><br><br>
+    <label>Phone:</label><input type="text" id="phone"><br><br>
+
+    <input type="submit" value="Register">
+</form>
+
+<p id="error" style="color:red;"></p>
+
+</body>
+<script>
+    
+function validateForm() {
+    let username = document.getElementById("username").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let phone = document.getElementById("phone").value.trim();
+    let error = document.getElementById("error");
+
+    error.innerHTML = "";
+
+    // Username
+    if (username === "") {
+        error.innerHTML = "Username is required";
+        return false;
+    }
+
+    // Email
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+        error.innerHTML = "Enter a valid email";
+        return false;
+    }
+
+    // Password length
+    if (password.length < 6) {
+        error.innerHTML = "Password must be at least 6 characters";
+        return false;
+    }
+
+    // Confirm password
+    if (password !== confirmPassword) {
+        error.innerHTML = "Passwords do not match";
+        return false;
+    }
+
+    // Phone number (10 digits)
+    let phonePattern = /^[0-9]{10}$/;
+    if (!phone.match(phonePattern)) {
+        error.innerHTML = "Enter a valid 10-digit phone number";
+        return false;
+    }
+
+    alert("Registration Successful!");
+    return true;
+}
+</script>
+</html>

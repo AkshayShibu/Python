@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSS Flexbox Playground • 2026</title>
+  <style>
+    :root {
+      --primary: #6366f1;     /* indigo-500 */
+      --primary-dark: #4f46e5;
+      --light: #f1f5f9;
+      --gray: #64748b;
+      --dark: #0f172a;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      margin: 0;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: var(--primary-dark);
+    }
+
+    h1 { margin-bottom: 0.8rem; }
+    .intro { text-align: center; max-width: 680px; margin: 0 auto 3rem; color: var(--gray); }
+
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--light);
+    }
+
+    /* Flex container examples */
+    .flex-demo {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 1.5rem;
+      min-height: 180px;
+      margin: 1.5rem 0;
+    }
+
+    .item {
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      font-size: 1.3rem;
+      padding: 1.2rem 1.6rem;
+      border-radius: 8px;
+      min-width: 80px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    /* Row of numbered items */
+    .items-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .items-row .item { background: #ec4899; } /* pink for basic items */
+
+    /* Controls */
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: var(--gray);
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    /* Common mini-layouts */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .card {
+      flex: 1 1 280px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover { transform: translateY(-6px); }
+
+    .card-header {
+      background: var(--primary);
+      color: white;
+      padding: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .card-body { padding: 1.4rem; }
+
+    .center-both {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--dark);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo { font-size: 1.5rem; font-weight: bold; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: white; text-decoration: none; }
+
+    footer { text-align: center; margin-top: 4rem; color: var(--gray); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>CSS Flexbox Demonstration</h1>
+  <p class="intro">Interactive examples showing the core Flexbox properties — play with the controls!</p>
+
+  <!-- Quick reference visual -->
+  <div class="section">
+    <h2>Flexbox Cheat Sheet (Visual Overview)</h2>
+    <p style="text-align:center; margin:1.5rem 0;">
+      <strong>Main parent properties:</strong> display: flex • flex-direction • flex-wrap • justify-content • align-items • align-content<br>
+      <strong>Item properties:</strong> flex-grow • flex-shrink • flex-basis • align-self • order
+    </p>
+    <img src="https://i.redd.it/vd9dc7wfk9471.png" alt="Flexbox Cheat Sheet" style="max-width:100%; height:auto; border-radius:10px; box-shadow:0 4px 14px rgba(0,0,0,0.1);">
+  </div>
+
+  <!-- 1. Basic direction & wrap -->
+  <div class="section">
+    <h2>1. flex-direction & flex-wrap</h2>
+    <div class="controls">
+      <div>
+        <label>flex-direction</label>
+        <select id="direction">
+          <option value="row">row (default)</option>
+          <option value="row-reverse">row-reverse</option>
+          <option value="column">column</option>
+          <option value="column-reverse">column-reverse</option>
+        </select>
+      </div>
+      <div>
+        <label>flex-wrap</label>
+        <select id="wrap">
+          <option value="nowrap">nowrap (default)</option>
+          <option value="wrap">wrap</option>
+          <option value="wrap-reverse">wrap-reverse</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex-demo items-row" id="demo1">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </div>
+  </div>
+
+  <!-- 2. justify-content -->
+  <div class="section">
+    <h2>2. justify-content (main axis)</h2>
+    <div class="controls">
+      <div>
+        <label>justify-content</label>
+        <select id="justify">
+          <option value="flex-start">flex-start</option>
+          <option value="flex-end">flex-end</option>
+          <option value="center" selected>center</option>
+          <option value="space-between">space-between</option>
+          <option value="space-around">space-around</option>
+          <option value="space-evenly">space-evenly</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-demo items-row" id="demo2">
+      <div class="item">A</div>
+      <div class="item">B</div>
+      <div class="item">C</div>
+    </div>
+  </div>
+
+  <!-- 3. align-items -->
+  <div class="section">
+    <h2>3. align-items (cross axis)</h2>
+    <div class="controls">
+      <div>
+        <label>align-items</label>
+        <select id="align">
+          <option value="stretch">stretch (default)</option>
+          <option value="flex-start">flex-start</option>
+          <option value="flex-end">flex-end</option>
+          <option value="center" selected>center</option>
+          <option value="baseline">baseline</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-demo" style="height: 220px;" id="demo3">
+      <div class="item" style="height:60px;">Short</div>
+      <div class="item" style="height:120px;">Medium</div>
+      <div class="item" style="height:90px;">Medium-ish</div>
+      <div class="item" style="height:40px;">Tiny</div>
+    </div>
+  </div>
+
+  <!-- 4. Real-world layouts -->
+  <div class="section">
+    <h2>4. Real-world Flexbox Patterns</h2>
+
+    <!-- Navigation bar -->
+    <h3>Navigation Bar (space-between)</h3>
+    <div class="navbar">
+      <div class="logo">MyApp</div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+
+    <!-- Card grid -->
+    <h3>Responsive Card Grid (flex-wrap + flex:1)</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">Basic Plan</div>
+        <div class="card-body">
+          <p>$9/month</p>
+          <p>10 projects • Basic support</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Pro Plan</div>
+        <div class="card-body">
+          <p>$29/month</p>
+          <p>Unlimited projects • Priority support</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Enterprise</div>
+        <div class="card-body">
+          <p>Contact us</p>
+          <p>Custom features • Dedicated team</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perfect centering -->
+    <h3>Perfect Centering (one of the best Flexbox uses)</h3>
+    <div class="center-both" style="background:#f0f9ff; border-radius:10px;">
+      <div class="item" style="background:#10b981; font-size:2rem; padding:2rem 4rem;">
+        Centered!
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Created as a Flexbox learning tool • Feel free to fork & experiment</p>
+  </footer>
+
+</div>
+
+<script>
+  // Interactive controls
+  const direction = document.getElementById('direction');
+  const wrap     = document.getElementById('wrap');
+  const justify  = document.getElementById('justify');
+  const align    = document.getElementById('align');
+
+  const demo1 = document.getElementById('demo1');
+  const demo2 = document.getElementById('demo2');
+  const demo3 = document.getElementById('demo3');
+
+  function updateDemo1() {
+    demo1.style.flexDirection = direction.value;
+    demo1.style.flexWrap      = wrap.value;
+  }
+
+  function updateDemo2() {
+    demo2.style.justifyContent = justify.value;
+  }
+
+  function updateDemo3() {
+    demo3.style.alignItems = align.value;
+  }
+
+  direction.addEventListener('change', updateDemo1);
+  wrap.addEventListener('change', updateDemo1);
+  justify.addEventListener('change', updateDemo2);
+  align.addEventListener('change', updateDemo3);
+
+  // Initial calls
+  updateDemo1();
+  updateDemo2();
+  updateDemo3();
+</script>
+
+</body>
+</html>

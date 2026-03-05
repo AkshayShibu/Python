@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Pop-up Boxes Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+        #alertBtn {
+            background-color: #e74c3c;
+        }
+        #confirmBtn {
+            background-color: #3498db;
+        }
+        #promptBtn {
+            background-color: #2ecc71;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            min-height: 50px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>JavaScript Pop-up Boxes Demo</h1>
+    <p>JavaScript provides three built-in dialog boxes:</p>
+    
+    <button id="alertBtn">Show Alert Box</button>
+    <button id="confirmBtn">Show Confirm Box</button>
+    <button id="promptBtn">Show Prompt Box</button>
+
+    <div id="result">
+        Click a button above to see the pop-up in action. Results will appear here.
+    </div>
+</div>
+
+<script>
+   
+    const resultDiv = document.getElementById('result');
+
+   
+    document.getElementById('alertBtn').addEventListener('click', function() {
+        alert("This is an Alert Box!\nIt is used to display important information or warnings.");
+        resultDiv.innerHTML = "<strong>Alert Box:</strong> You clicked OK on the alert.";
+    });
+
+   
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+        const userChoice = confirm("This is a Confirm Box!\nDo you want to proceed?");
+        
+        if (userChoice) {
+            resultDiv.innerHTML = "<strong>Confirm Box:</strong> You clicked <span style='color:green;'>OK</span>. Action confirmed!";
+        } else {
+            resultDiv.innerHTML = "<strong>Confirm Box:</strong> You clicked <span style='color:red;'>Cancel</span>. Action cancelled.";
+        }
+    });
+
+   
+    document.getElementById('promptBtn').addEventListener('click', function() {
+        const userName = prompt("This is a Prompt Box!\nPlease enter your name:", "John Doe");
+        
+        if (userName === null) {
+          
+            resultDiv.innerHTML = "<strong>Prompt Box:</strong> You clicked Cancel. No input provided.";
+        } else if (userName.trim() === "") {
+            
+            resultDiv.innerHTML = "<strong>Prompt Box:</strong> You entered an empty name.";
+        } else {
+            
+            resultDiv.innerHTML = `<strong>Prompt Box:</strong> Hello, <span style='color:blue;'>${userName}</span>! Nice to meet you!`;
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Horizontal Scroll tab</title>
+    </head>
+        <style>
+            .container{
+                display:flex;
+                /* Always show horizontal scrollbar */
+                overflow-x: scroll;
+                overflow-y: hidden;
+                -ms-overflow-style: auto; /* IE/Edge */
+                scrollbar-width: thin; /* Firefox */
+                scroll-snap-type:x mandatory;
+                gap: 10px;
+                padding:10px;
+                padding-bottom:14px; /* room for scrollbar */
+                background-color: #87CEEB;
+            }
+
+            /* WebKit scrollbar styling */
+            .container::-webkit-scrollbar{
+                height:12px;
+            }
+            .container::-webkit-scrollbar-track{
+                background: rgba(0,0,0,0.08);
+                border-radius:6px;
+            }
+            .container::-webkit-scrollbar-thumb{
+                background: rgba(0,0,0,0.35);
+                border-radius:6px;
+            }
+            .container::-webkit-scrollbar-thumb:hover{
+                background: rgba(0,0,0,0.5);
+            }
+
+            /* Firefox scrollbar colors */
+            .container{
+                scrollbar-color: rgba(0,0,0,0.35) rgba(0,0,0,0.08);
+            }
+
+            .item{
+                flex:0 0 200px;
+                height: 150px;
+                background-color:aquamarine;
+                display: flex;
+                scroll-snap-align:center;
+                justify-content: center;
+                align-items:center;
+                font-size:20px;
+            }
+        </style>
+
+        <body>
+        <div class="container">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item">Item 5</div>
+        </div>
+        </body>
+</html>

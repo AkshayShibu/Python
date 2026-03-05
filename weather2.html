@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Weather App</title>
+  
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #b3e5fc);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 1.5rem;
+      color: #333;
+      font-size: 2rem;
+    }
+
+    .input-group {
+      display: flex;
+      margin-bottom: 1.8rem;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 1.1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px 0 0 6px;
+      outline: none;
+    }
+
+    button {
+      padding: 0 24px;
+      font-size: 1.1rem;
+      background: #0288d1;
+      color: white;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #0277bd;
+    }
+
+    #result {
+      margin-top: 1.5rem;
+      min-height: 180px;
+    }
+
+    .city-name {
+      font-size: 1.8rem;
+      margin: 0.4rem 0;
+      color: #01579b;
+    }
+
+    .temp {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin: 0.3rem 0;
+      color: #d81b60;
+    }
+
+    .description {
+      font-size: 1.3rem;
+      text-transform: capitalize;
+      color: #444;
+      margin: 0.6rem 0;
+    }
+
+    .details {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .detail-item {
+      background: #f5f5f5;
+      padding: 12px 18px;
+      border-radius: 8px;
+      min-width: 100px;
+    }
+
+    .error {
+      color: #d32f2f;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .loading {
+      font-style: italic;
+      color: #777;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Weather App</h1>
+    
+    <div class="input-group">
+      <input type="text" id="cityInput" placeholder="Enter city name (e.g. Kochi)" autofocus>
+      <button onclick="getWeather()">Get Weather</button>
+    </div>
+
+    <div id="result">
+      <!-- Weather info will appear here -->
+    </div>
+  </div>
+
+  <script>
+    // You can get your own free key at: https://openweathermap.org/
+    // For demo purposes you can use this public one (limited requests)
+    const API_KEY = "0c4e6d6b3f064ed0a5e0e6e1a0e6d6b3"; // ← replace with your own key
+    
+    const resultDiv = document.getElementById("result");
+    const cityInput = document.getElementById("cityInput");
+
+    // Allow pressing Enter to search
+    cityInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        getWeather();
+      }
+    });
+
+    async function getWeather() {
+      const city = cityInput.value.trim();
+      
+      if (!city) {
+        showError("Please enter a city name");
+        return;
+      }
+
+      resultDiv.innerHTML = '<div class="loading">Loading...</div>';
+
+      try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(response.status === 404 ? "City not found" : "Something went wrong");
+        }
+
+        const data = await response.json();
+
+        displayWeather(data);
+
+      } catch (error) {
+        showError(error.message);
+      }
+    }
+
+    function displayWeather(data) {
+      const { name, main, weather, wind } = data;
+      const condition = weather[0];
+
+      resultDiv.innerHTML = `
+        <h2 class="city-name">${name}</h2>
+        <div class="temp">${Math.round(main.temp)}°C</div>
+        <div class="description">${condition.description}</div>
+        
+        <div class="details">
+          <div class="detail-item">
+            <strong>Humidity</strong><br>${main.humidity}%
+          </div>
+          <div class="detail-item">
+            <strong>Wind</strong><br>${Math.round(wind.speed * 3.6)} km/h
+          </div>
+        </div>
+      `;
+    }
+
+    function showError(message) {
+      resultDiv.innerHTML = `<div class="error">${message}</div>`;
+    }
+  </script>
+
+</body>
+</html>

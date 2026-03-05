@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Pricing Table</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #eef2f7;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.pricing {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.plan {
+  background: white;
+  border-radius: 12px;
+  width: 260px;
+  padding: 25px 20px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  border-top: 6px solid #6366f1;   /* color strip */
+}
+
+/* POP UP EFFECT */
+.plan:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+}
+
+.popular {
+  border-top: 6px solid #10b981;
+  background: linear-gradient(#ffffff, #ecfdf5);
+}
+
+.plan h2 {
+  margin-bottom: 10px;
+  color: #4f46e5;
+}
+
+.price {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 12px 0;
+  color: #16a34a;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  color: #555;
+}
+
+ul li {
+  margin: 8px 0;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #4338ca;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Pricing Plans</h1>
+
+<div class="pricing">
+
+  <div class="plan">
+    <h2>Basic</h2>
+    <div class="price">$9/mo</div>
+    <ul>
+      <li>1 Project</li>
+      <li>Email Support</li>
+      <li>Basic Tools</li>
+    </ul>
+    <button>Choose</button>
+  </div>
+
+  <div class="plan popular">
+    <h2>Pro</h2>
+    <div class="price">$29/mo</div>
+    <ul>
+      <li>10 Projects</li>
+      <li>Priority Support</li>
+      <li>Advanced Tools</li>
+    </ul>
+    <button>Choose</button>
+  </div>
+
+  <div class="plan">
+    <h2>Enterprise</h2>
+    <div class="price">Custom</div>
+    <ul>
+      <li>Unlimited</li>
+      <li>24/7 Support</li>
+      <li>All Features</li>
+    </ul>
+    <button>Contact</button>
+  </div>
+
+</div>
+
+</body>
+</html>

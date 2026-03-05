@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing Table • Modern Design</title>
+  <style>
+    :root {
+      --primary: #6366f1;       /* indigo */
+      --primary-dark: #4f46e5;
+      --accent: #10b981;        /* emerald - for popular plan */
+      --light: #f8fafc;
+      --gray: #64748b;
+      --dark: #0f172a;
+      --border: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 1.2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .plan {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .plan.popular {
+      border: 2px solid var(--accent);
+      transform: scale(1.06);
+      z-index: 10;
+      box-shadow: 0 20px 50px rgba(16, 185, 129, 0.18);
+    }
+
+    .plan:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.14);
+    }
+
+    .plan.popular:hover {
+      transform: translateY(-12px) scale(1.08);
+    }
+
+    .plan-header {
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+
+    .plan.popular .plan-header {
+      background: linear-gradient(135deg, var(--accent) 0%, #059669 100%);
+      color: white;
+    }
+
+    .plan-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .plan-price {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin: 0.4rem 0;
+    }
+
+    .plan-price small {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .plan-description {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-top: 0.8rem;
+    }
+
+    .plan-features {
+      padding: 2rem 1.8rem;
+      background: white;
+    }
+
+    .features-list {
+      list-style: none;
+      margin: 0 0 2rem;
+    }
+
+    .features-list li {
+      margin: 1rem 0;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .features-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .plan.popular .features-list li::before {
+      color: var(--accent);
+    }
+
+    .cta-button {
+      display: block;
+      width: 90%;
+      margin: 0 auto 1.8rem;
+      padding: 1rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .cta-button.primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .cta-button.accent {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+    }
+
+    .cta-button.accent:hover {
+      background: #059669;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(16, 185, 129, 0.4);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      transform: rotate(12deg);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    @media (max-width: 720px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      .plan.popular {
+        transform: scale(1.02);
+      }
+      .plan.popular:hover {
+        transform: scale(1.04) translateY(-8px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Simple, Fair Pricing</h1>
+  <p class="subtitle">Choose the plan that best fits your needs. No hidden fees.</p>
+
+  <div class="pricing-grid">
+
+    <!-- Starter -->
+    <div class="plan">
+      <div class="plan-header">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">$9<span>/mo</span></div>
+        <div class="plan-description">Perfect for individuals & small projects</div>
+      </div>
+      <div class="plan-features">
+        <ul class="features-list">
+          <li>1 Workspace</li>
+          <li>5 Active Projects</li>
+          <li>Basic Analytics</li>
+          <li>Email Support</li>
+          <li>Community Access</li>
+        </ul>
+        <a href="#" class="cta-button primary">Get Started</a>
+      </div>
+    </div>
+
+    <!-- Pro (Popular) -->
+    <div class="plan popular">
+      <div class="popular-badge">Most Popular</div>
+      <div class="plan-header">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$30<span>/mo</span></div>
+        <div class="plan-description">For growing teams & serious creators</div>
+      </div>
+      <div class="plan-features">
+        <ul class="features-list">
+          <li>Unlimited Workspaces</li>
+          <li>Unlimited Projects</li>
+          <li>Advanced Analytics</li>
+          <li>Priority Support</li>
+          <li>Custom Branding</li>
+          <li>Team Collaboration</li>
+          <li>API Access</li>
+        </ul>
+        <a href="#" class="cta-button accent">Start 14-day Trial</a>
+      </div>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="plan">
+      <div class="plan-header">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">Custom</div>
+        <div class="plan-description">For large organizations & high volume</div>
+      </div>
+      <div class="plan-features">
+        <ul class="features-list">
+          <li>Everything in Pro</li>
+          <li>Dedicated Account Manager</li>
+          <li>Custom Integrations</li>
+          <li>SLA & Uptime Guarantee</li>
+          <li>Advanced Security</li>
+          <li>On-premise option</li>
+          <li>Training & Onboarding</li>
+        </ul>
+        <a href="#" class="cta-button primary">Contact Sales</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

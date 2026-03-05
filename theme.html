@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Changer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            transition: background-color 0.5s, color 0.5s;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .light {
+            background-color: white;
+            color: black;
+        }
+        .dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .blue {
+            background-color: #1e90ff;
+            color: white;
+        }
+        button {
+            padding: 12px 20px;
+            margin: 8px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        button.active {
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+        .light button { background: #f0f0f0; color: black; }
+        .dark button   { background: #333; color: white; }
+        .blue button   { background: white; color: #1e90ff; }
+    </style>
+</head>
+<body class="light">
+
+    <h2>Dynamic Theme Changer</h2>
+    
+    <button id="btnLight" onclick="setTheme('light')">Light Theme</button>
+    <button id="btnDark"  onclick="setTheme('dark')">Dark Theme</button>
+    <button id="btnBlue"  onclick="setTheme('blue')">Blue Theme</button>
+
+    <p style="margin-top: 40px;">Current theme persists after refresh!</p>
+
+    <script>
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        function setTheme(theme) {
+
+            document.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+
+            document.body.className = theme;
+            
+            document.getElementById(`btn${theme.charAt(0).toUpperCase() + theme.slice(1)}`).classList.add('active');
+
+            localStorage.setItem('theme', theme);
+        }
+    </script>
+
+</body>
+</html>

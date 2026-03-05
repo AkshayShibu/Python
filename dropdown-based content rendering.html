@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dropdown Content Rendering</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #contentBox {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Select a Topic</h2>
+
+<select id="topic" onchange="showContent()">
+    <option value="">-- Choose --</option>
+    <option value="html">HTML</option>
+    <option value="css">CSS</option>
+    <option value="js">JavaScript</option>
+</select>
+
+<div id="contentBox">Content will appear here...</div>
+
+<script>
+function showContent() {
+    let choice = document.getElementById("topic").value;
+    let box = document.getElementById("contentBox");
+
+    if (choice === "html") {
+        box.innerHTML = "HTML is used to structure web pages.";
+    } 
+    else if (choice === "css") {
+        box.innerHTML = "CSS is used to style web pages.";
+    } 
+    else if (choice === "js") {
+        box.innerHTML = "JavaScript adds interactivity to web pages.";
+    } 
+    else {
+        box.innerHTML = "Content will appear here...";
+    }
+}
+</script>
+
+</body>
+</html>
